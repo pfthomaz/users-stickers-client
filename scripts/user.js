@@ -1,4 +1,3 @@
-const API_URL = getHostURL();
 
 $(document).ready(function () {
   // get user id from url query
@@ -8,7 +7,7 @@ $(document).ready(function () {
     .then(addUserInfoToPage)
     .then(getStickers)
     .then(addStickers)
-    .catch(weSuck);
+    .catch(handleError);
   // show user information
   // make a request to server for the stickers for the user with that id
   // show user stickers
@@ -49,14 +48,6 @@ function addStickers(stickers) {
   $('.stickers').html(html);
 }
 
-function weSuck() {
-  alert('user not found... and we suck')
-}
-
-function getHostURL() {
-  if (window.location.host.indexOf('localhost') != -1) {
-    return 'http://localhost:3000';
-  } else {
-    return 'https://sticker-mania.herokuapp.com';
-  }
+function handleError(error) {
+  window.location = '/login.html';
 }
